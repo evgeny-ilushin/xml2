@@ -1,6 +1,5 @@
 package com.zw.util;
 
-import org.apache.commons.lang3.StringUtils;
 import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 
@@ -22,7 +21,7 @@ public class xml2 {
     private static void process(String file) {
         try {
             DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
-            factory.setValidating(true);
+            factory.setValidating(false);
             factory.setIgnoringElementContentWhitespace(true);
             DocumentBuilder builder = factory.newDocumentBuilder();
             Document doc = builder.parse(new File(file));
@@ -44,7 +43,7 @@ public class xml2 {
         String name = node.getNodeName();
         if (node.getChildNodes().getLength() == 0) {
             String content = node.getTextContent();
-            if (StringUtils.isNotBlank(content)) {
+            if (content != null && content.trim().length() > 0) {
                 System.out.println(path + "=" + content);
             }
         } else {
